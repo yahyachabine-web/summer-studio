@@ -15,7 +15,7 @@
 
         body {
             font-family: 'Rajdhani', sans-serif;
-            background: linear-gradient(to bottom, #11052C 0%, #190033 50%, #800080 100%);
+            background: linear-gradient(to bottom, #11052C 0%, #190033 50%, #4a0e4e 100%);
             color: #fff;
             min-height: 100vh;
             display: flex;
@@ -27,18 +27,19 @@
             position: relative;
         }
 
-        /* Uses your uploaded grid image locally */
+        /* Generated purple grid background natively in CSS */
         .grid-background {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('grid.png');
-            background-size: cover;
-            background-position: center;
+            background-image: 
+                linear-gradient(rgba(148, 0, 211, 0.25) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(148, 0, 211, 0.25) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: center bottom;
             z-index: 0;
-            opacity: 0.4;
         }
 
         h1 {
@@ -97,20 +98,19 @@
             box-shadow: 0 0 40px rgba(255, 0, 127, 0.4);
         }
 
-        .clothing-layer {
+        /* Displays styling element icons nicely in visual layout center */
+        .clothing-display {
             position: absolute;
+            font-size: 5.5rem;
             z-index: 2;
-            max-width: 75%;
-            max-height: 55%;
-            object-fit: contain;
             transition: all 0.2s ease-in-out;
+            user-select: none;
         }
 
-        /* Perfectly stacked relative coordinates */
-        #layer-acc    { z-index: 5; top: 14%; height: 14%; }
-        #layer-top    { z-index: 4; top: 25%; height: 32%; }
-        #layer-bottom { z-index: 3; top: 50%; height: 30%; }
-        #layer-shoes  { z-index: 2; bottom: 8%; height: 16%; }
+        #layer-acc    { z-index: 5; top: 12%; font-size: 4.5rem; }
+        #layer-top    { z-index: 4; top: 30%; }
+        #layer-bottom { z-index: 3; top: 52%; }
+        #layer-shoes  { z-index: 2; bottom: 10%; font-size: 4.5rem; }
 
         .right-panel {
             flex: 1.2;
@@ -244,10 +244,10 @@
         <div class="avatar-canvas">
             <div class="synth-sun"></div>
             
-            <img id="layer-acc" class="clothing-layer" src="" alt="Accessory">
-            <img id="layer-top" class="clothing-layer" src="" alt="Top">
-            <img id="layer-bottom" class="clothing-layer" src="" alt="Bottom">
-            <img id="layer-shoes" class="clothing-layer" src="" alt="Shoes">
+            <div id="layer-acc" class="clothing-display"></div>
+            <div id="layer-top" class="clothing-display"></div>
+            <div id="layer-bottom" class="clothing-display"></div>
+            <div id="layer-shoes" class="clothing-display"></div>
         </div>
 
         <div class="right-panel">
@@ -309,12 +309,34 @@
     </div>
 
     <script>
-        // Directly references files locally in your GitHub repository folder 
+        // Compiled clothing sets directly from your mood boards
         const assets = {
-            top: [{ name: "Navy Halter Corset Top", url: "top.png" }],
-            bottom: [{ name: "Light Wash Denim Skirt", url: "bottom.png" }],
-            acc: [{ name: "Dark Acetate Sunglasses", url: "acc.png" }],
-            shoes: [{ name: "Adidas Campus Navy", url: "shoes.png" }]
+            top: [
+                { name: "Navy Halter Corset Top", char: "🎽", vibe: "coastal_chic" },
+                { name: "Stüssy World Tour Tee", char: "👕", vibe: "streetwear" },
+                { name: "White Linen Tie Tank", char: "👚", vibe: "resort" },
+                { name: "Polo Cable-Knit Hoodie", char: "🧥", vibe: "casual" },
+                { name: "Striped Knit Resort Shirt", char: "👔", vibe: "vintage_vacation" }
+            ],
+            bottom: [
+                { name: "Light Wash Denim Skirt", char: "👗", vibe: "coastal_chic" },
+                { name: "Grey Nike Sweat Shorts", char: "🩳", vibe: "streetwear" },
+                { name: "Navy Pleated Linen Pants", char: "👖", vibe: "resort" },
+                { name: "Light Wash Relaxed Jeans", char: "👖", vibe: "casual" },
+                { name: "Muted Brown Cargo Shorts", char: "🩳", vibe: "vintage_vacation" }
+            ],
+            acc: [
+                { name: "Dark Acetate Sunglasses", char: "🕶️", vibe: "coastal_chic" },
+                { name: "Vintage Trucker Cap", char: "🧢", vibe: "streetwear" },
+                { name: "Minimalist Silver Chain", char: "📿", vibe: "casual" },
+                { name: "Gold Medallion Pendant", char: "🏅", vibe: "resort" }
+            ],
+            shoes: [
+                { name: "Adidas Campus Navy", char: "👟", vibe: "coastal_chic" },
+                { name: "Yeezy-Style Slides Black", char: "🩴", vibe: "streetwear" },
+                { name: "Taupe Suede Birkenstocks", char: "🥿", vibe: "resort" },
+                { name: "Adidas Samba White/Black", char: "👟", vibe: "vintage_vacation" }
+            ]
         };
 
         const indices = { top: 0, bottom: 0, acc: 0, shoes: 0 };
@@ -325,8 +347,7 @@
                 if (!item) continue;
                 
                 document.getElementById(`text-${category}`).innerText = item.name;
-                const imgElement = document.getElementById(`layer-${category}`);
-                imgElement.src = item.url;
+                document.getElementById(`layer-${category}`).innerText = item.char;
             }
             rateOutfit();
         }
@@ -338,15 +359,42 @@
         }
 
         function spinRandom() {
+            for (let category in indices) {
+                if (assets[category].length > 0) {
+                    indices[category] = Math.floor(Math.random() * assets[category].length);
+                }
+            }
             render();
         }
 
         function rateOutfit() {
-            document.getElementById("vibe-score").innerText = "10.0";
-            document.getElementById("vibe-critique").innerText = "⚡ LOOK CONGRUENCE MET! Local files compiled successfully.";
+            const currentVibes = [
+                assets.top[indices.top]?.vibe,
+                assets.bottom[indices.bottom]?.vibe,
+                assets.acc[indices.acc]?.vibe,
+                assets.shoes[indices.shoes]?.vibe
+            ].filter(Boolean);
+
+            let vibeCounts = {};
+            currentVibes.forEach(v => vibeCounts[v] = (vibeCounts[v] || 0) + 1);
+            let maxMatch = Math.max(...Object.values(vibeCounts), 0);
+
+            let score = 7.2;
+            let text = "✨ ECLECTIC HYBRID! Creative aesthetic mix from your design boards.";
+
+            if (maxMatch === currentVibes.length) {
+                score = 10.0;
+                text = "⚡ LOOK CONGRUENCE MET! Perfect aesthetic cohesion from your layout board.";
+            } else if (maxMatch >= 2) {
+                score = 9.2;
+                text = "🔥 SYNC STABLE! Clean color block and sub-genre coordination detected.";
+            }
+
+            document.getElementById("vibe-score").innerText = score.toFixed(1);
+            document.getElementById("vibe-critique").innerText = text;
         }
 
-        window.onload = render;
+        window.onload = spinRandom;
     </script>
 </body>
 </html>
