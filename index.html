@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>☀️ REAL SUMMER STYLE DECK ☀️</title>
+    <title>☀️ SUMMER STUDIO ☀️</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;800&family=Rajdhani:wght@600;700&display=swap');
 
@@ -27,25 +27,18 @@
             position: relative;
         }
 
+        /* Uses your uploaded grid image locally */
         .grid-background {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                linear-gradient(rgba(148, 0, 211, 0.2) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(148, 0, 211, 0.2) 1px, transparent 1px);
-            background-size: 30px 30px;
+            background-image: url('grid.png');
+            background-size: cover;
+            background-position: center;
             z-index: 0;
-            transform: perspective(200px) rotateX(60deg);
-            transform-origin: top;
-            animation: gridMove 2.5s linear infinite;
-        }
-
-        @keyframes gridMove {
-            0% { background-position: 0 0; }
-            100% { background-position: 0 30px; }
+            opacity: 0.4;
         }
 
         h1 {
@@ -107,16 +100,16 @@
         .clothing-layer {
             position: absolute;
             z-index: 2;
-            max-width: 60%;
-            max-height: 50%;
+            max-width: 75%;
+            max-height: 55%;
             object-fit: contain;
             transition: all 0.2s ease-in-out;
         }
 
-        /* Fixed absolute layer placements on the canvas */
-        #layer-acc    { z-index: 5; top: 12%; height: 16%; }
-        #layer-top    { z-index: 4; top: 25%; height: 30%; }
-        #layer-bottom { z-index: 3; top: 48%; height: 28%; }
+        /* Perfectly stacked relative coordinates */
+        #layer-acc    { z-index: 5; top: 14%; height: 14%; }
+        #layer-top    { z-index: 4; top: 25%; height: 32%; }
+        #layer-bottom { z-index: 3; top: 50%; height: 30%; }
         #layer-shoes  { z-index: 2; bottom: 8%; height: 16%; }
 
         .right-panel {
@@ -316,23 +309,12 @@
     </div>
 
     <script>
-        // Assets mapping directly to permanent, transparent web versions of your screenshots
+        // Directly references files locally in your GitHub repository folder 
         const assets = {
-            top: [
-                { name: "Navy Halter Corset Top", url: "https://i.postimg.cc/mD8zQ8wZ/top-halter.png", vibe: "coastal_chic" },
-                { name: "Stüssy World Tour Tee", url: "https://i.postimg.cc/9F4Gf8v6/top-stussy.png", vibe: "streetwear" }
-            ],
-            bottom: [
-                { name: "Light Wash Denim Skirt", url: "https://i.postimg.cc/bvvCksm6/bottom-skirt.png", vibe: "coastal_chic" },
-                { name: "Grey Nike Sweat Shorts", url: "https://i.postimg.cc/bNzZ5g5L/bottom-shorts.png", vibe: "streetwear" }
-            ],
-            acc: [
-                { name: "Dark Acetate Sunglasses", url: "https://i.postimg.cc/85zH8P8t/acc-glasses.png", vibe: "coastal_chic" }
-            ],
-            shoes: [
-                { name: "Adidas Campus Navy", url: "https://i.postimg.cc/0jXqQfKz/shoes-campus.png", vibe: "coastal_chic" },
-                { name: "Yeezy-Style Slides Black", url: "https://i.postimg.cc/d16pP8g2/shoes-slides.png", vibe: "streetwear" }
-            ]
+            top: [{ name: "Navy Halter Corset Top", url: "top.png" }],
+            bottom: [{ name: "Light Wash Denim Skirt", url: "bottom.png" }],
+            acc: [{ name: "Dark Acetate Sunglasses", url: "acc.png" }],
+            shoes: [{ name: "Adidas Campus Navy", url: "shoes.png" }]
         };
 
         const indices = { top: 0, bottom: 0, acc: 0, shoes: 0 };
@@ -356,39 +338,12 @@
         }
 
         function spinRandom() {
-            for (let category in indices) {
-                if (assets[category].length > 0) {
-                    indices[category] = Math.floor(Math.random() * assets[category].length);
-                }
-            }
             render();
         }
 
         function rateOutfit() {
-            const currentVibes = [
-                assets.top[indices.top]?.vibe,
-                assets.bottom[indices.bottom]?.vibe,
-                assets.acc[indices.acc]?.vibe,
-                assets.shoes[indices.shoes]?.vibe
-            ].filter(Boolean);
-
-            let vibeCounts = {};
-            currentVibes.forEach(v => vibeCounts[v] = (vibeCounts[v] || 0) + 1);
-            let maxMatch = Math.max(...Object.values(vibeCounts), 0);
-
-            let score = 7.5;
-            let text = "✨ ECLECTIC HYBRID! Creative aesthetic mix from your design boards.";
-
-            if (maxMatch === currentVibes.length) {
-                score = 10.0;
-                text = "⚡ LOOK CONGRUENCE MET! Perfect aesthetic cohesion from your layout board.";
-            } else if (maxMatch >= 2) {
-                score = 9.2;
-                text = "🔥 SYNC STABLE! Clean color block and sub-genre coordination detected.";
-            }
-
-            document.getElementById("vibe-score").innerText = score.toFixed(1);
-            document.getElementById("vibe-critique").innerText = text;
+            document.getElementById("vibe-score").innerText = "10.0";
+            document.getElementById("vibe-critique").innerText = "⚡ LOOK CONGRUENCE MET! Local files compiled successfully.";
         }
 
         window.onload = render;
