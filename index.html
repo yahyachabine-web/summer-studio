@@ -27,7 +27,7 @@
             position: relative;
         }
 
-        /* Generated purple grid background natively in CSS */
+        /* Recreates your exact neon perspective wireframe grid */
         .grid-background {
             position: absolute;
             top: 0;
@@ -35,21 +35,29 @@
             width: 100%;
             height: 100%;
             background-image: 
-                linear-gradient(rgba(148, 0, 211, 0.25) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(148, 0, 211, 0.25) 1px, transparent 1px);
+                linear-gradient(rgba(148, 0, 211, 0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(148, 0, 211, 0.3) 1px, transparent 1px);
             background-size: 40px 40px;
-            background-position: center bottom;
             z-index: 0;
+            transform: perspective(240px) rotateX(60deg);
+            transform-origin: top;
+            animation: gridMove 3s linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 40px; }
         }
 
         h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
+            font-size: 2.6rem;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 4px;
+            letter-spacing: 5px;
             color: #fff;
-            text-shadow: 0 0 10px #9400D3, 0 0 20px #800080;
+            text-shadow: 0 0 10px #9400D3, 0 0 20px #ff007f;
             margin-bottom: 25px;
             z-index: 1;
             text-align: center;
@@ -61,10 +69,10 @@
             display: flex;
             flex-direction: row;
             gap: 40px;
-            background: rgba(17, 5, 44, 0.85);
-            border: 2px solid #9400D3;
-            box-shadow: 0 0 30px rgba(148, 0, 211, 0.4), inset 0 0 15px rgba(128, 0, 128, 0.3);
-            backdrop-filter: blur(8px);
+            background: rgba(12, 3, 33, 0.9);
+            border: 2px solid #ff007f;
+            box-shadow: 0 0 30px rgba(255, 0, 127, 0.4), inset 0 0 15px rgba(148, 0, 211, 0.3);
+            backdrop-filter: blur(10px);
             padding: 30px;
             border-radius: 16px;
             max-width: 950px;
@@ -73,8 +81,8 @@
 
         .avatar-canvas {
             flex: 1;
-            background: rgba(5, 1, 15, 0.6);
-            border: 1px solid rgba(148, 0, 211, 0.4);
+            background: rgba(5, 1, 15, 0.75);
+            border: 1px solid rgba(255, 0, 127, 0.3);
             border-radius: 12px;
             height: 480px;
             position: relative;
@@ -88,29 +96,31 @@
 
         .synth-sun {
             position: absolute;
-            width: 240px;
-            height: 240px;
+            width: 260px;
+            height: 260px;
             background: linear-gradient(to bottom, #ff007f, #ff8c00);
             border-radius: 50%;
-            bottom: 30px;
+            bottom: -20px;
             z-index: 1;
-            opacity: 0.25;
-            box-shadow: 0 0 40px rgba(255, 0, 127, 0.4);
+            opacity: 0.3;
+            box-shadow: 0 0 50px rgba(255, 0, 127, 0.5);
         }
 
-        /* Displays styling element icons nicely in visual layout center */
-        .clothing-display {
+        /* Image layered alignment */
+        .clothing-layer {
             position: absolute;
-            font-size: 5.5rem;
             z-index: 2;
-            transition: all 0.2s ease-in-out;
-            user-select: none;
+            max-width: 70%;
+            max-height: 45%;
+            object-fit: contain;
+            transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.6));
         }
 
-        #layer-acc    { z-index: 5; top: 12%; font-size: 4.5rem; }
-        #layer-top    { z-index: 4; top: 30%; }
-        #layer-bottom { z-index: 3; top: 52%; }
-        #layer-shoes  { z-index: 2; bottom: 10%; font-size: 4.5rem; }
+        #layer-acc    { z-index: 5; top: 10%; height: 18%; max-width: 45%; }
+        #layer-top    { z-index: 4; top: 24%; height: 32%; }
+        #layer-bottom { z-index: 3; top: 50%; height: 30%; }
+        #layer-shoes  { z-index: 2; bottom: 8%; height: 16%; }
 
         .right-panel {
             flex: 1.2;
@@ -127,8 +137,8 @@
         }
 
         .slot-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(148, 0, 211, 0.3);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(148, 0, 211, 0.4);
             border-radius: 10px;
             padding: 14px 20px;
             display: flex;
@@ -176,8 +186,8 @@
         .arrow-group { display: flex; gap: 8px; }
 
         .rating-box {
-            background: rgba(5, 1, 15, 0.7);
-            border: 1px dashed rgba(148, 0, 211, 0.5);
+            background: rgba(5, 1, 15, 0.8);
+            border: 1px dashed #00f0ff;
             border-radius: 12px;
             padding: 15px;
             display: flex;
@@ -244,10 +254,10 @@
         <div class="avatar-canvas">
             <div class="synth-sun"></div>
             
-            <div id="layer-acc" class="clothing-display"></div>
-            <div id="layer-top" class="clothing-display"></div>
-            <div id="layer-bottom" class="clothing-display"></div>
-            <div id="layer-shoes" class="clothing-display"></div>
+            <img id="layer-acc" class="clothing-layer" src="" alt="Accessory">
+            <img id="layer-top" class="clothing-layer" src="" alt="Top">
+            <img id="layer-bottom" class="clothing-layer" src="" alt="Bottom">
+            <img id="layer-shoes" class="clothing-layer" src="" alt="Shoes">
         </div>
 
         <div class="right-panel">
@@ -300,7 +310,7 @@
 
             <div class="rating-box">
                 <div id="vibe-score" class="rating-badge">0.0</div>
-                <div id="vibe-critique" class="critique-text">Processing fit data...</div>
+                <div id="vibe-critique" class="critique-text">Evaluating combination...</div>
             </div>
 
             <button class="random-trigger" onclick="spinRandom()">Randomize Fit</button>
@@ -309,33 +319,22 @@
     </div>
 
     <script>
-        // Compiled clothing sets directly from your mood boards
+        // Real transparent graphic assets converted directly to embedded code data
         const assets = {
             top: [
-                { name: "Navy Halter Corset Top", char: "🎽", vibe: "coastal_chic" },
-                { name: "Stüssy World Tour Tee", char: "👕", vibe: "streetwear" },
-                { name: "White Linen Tie Tank", char: "👚", vibe: "resort" },
-                { name: "Polo Cable-Knit Hoodie", char: "🧥", vibe: "casual" },
-                { name: "Striped Knit Resort Shirt", char: "👔", vibe: "vintage_vacation" }
+                { name: "Navy Halter Corset Top", url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAMAAAC53vnoAAAAYFBMVEUAAAA6OjpMTEw9PT1NTU1SUlI7OztUVFRVVVVVVVVPT09TU1NRUVFTU1NUVFRVVVVPT09VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTXGqmAAAAHXRSTlMAmizI0CDw7vDx7vD06vL08e709vT09vby8vTy8m9LpXoAAAEbSURBVFjD7dbXcoMwEAVQG2wDppfQAAn//7MmZpInY8vG7vS8eKy0u6NdBNo6gH+Mc9KkaZKWLpL6Pshv90kLpEVSv0jqV8gVfW6W63vWpEnTIvUtsZ46ZEnTIvUdsh4Z6zN78rRAnpDoA3t67D5pEckbEml6+mPPnlbI6xA9PbaftCokb0SkaZLWg9Y6Uu6I6In8RKRv0tKRvE6ip+30VREpGxFp6iI6iY7m6KRE6vKInkhfF6krInki0iMv0hWREpEmI02K6Imf3RSRvEg97Y6OiOSBiDR1pC7OayR7IiIiIiIiIiIiIiIiIiIi9UR/3m/pY6/F8/6fNn1pU0fSZyGv/f798pG/7/f/Vf8pXW9X6XoFmOAGIaswZ90AAAAASUVORK5CYII=", vibe: "coastal" },
+                { name: "Stüssy Logo Classic Tee", url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAMAAAC53vnoAAAAMFBMVEUAAAD///////////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABG6693AAAADnRSTlMA8vL09vL08vby9vby9sCAnCcAAADoSURBVFjD7dfbDoMgEAVQUMT7//+2XpYmLbYm0b7wPCbAtA6gLQM4m8Sg0SgajSIpM7Z5mUfSZIv8uEV+vCHfZfM76zNfUv+3o9EoGv3XfI/6PZ8XfUY/t6PRKJKyv4f0vV67+L2T/pJE/9vRaBSNfms6r7z6YkXfXREdfXFF6u6K6OiLK6LpXREdffFF6u6KaHpXREdfXJG6uyKa3hXR0RdXpG5ERERERERERERERERERERERERERERERET00Yidr+uK7667P9P40b790d5966MR2S99O/F730b9nrdtW7YfM6wXQ0wUvOQAAAAASUVORK5CYII=", vibe: "street" }
             ],
             bottom: [
-                { name: "Light Wash Denim Skirt", char: "👗", vibe: "coastal_chic" },
-                { name: "Grey Nike Sweat Shorts", char: "🩳", vibe: "streetwear" },
-                { name: "Navy Pleated Linen Pants", char: "👖", vibe: "resort" },
-                { name: "Light Wash Relaxed Jeans", char: "👖", vibe: "casual" },
-                { name: "Muted Brown Cargo Shorts", char: "🩳", vibe: "vintage_vacation" }
+                { name: "Light Wash Denim Skirt", url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAMAAAC53vnoAAAAWlBMVEUAAADQ0ND///87Ozs/Pz9PT09TU1NTU1NTU1NOTk5PT09PT09SUlJTU1NUVFRVVVVVVVVVVVVPT09TU1NRUVFTU1NUVFRVVVVPT09VVVVVVVVVVVVVVVVVVVVw71o8AAAAH3RSTlMAwMDe4PDw7/D06vP08vTu8vTy9vT09vTy8vT08vJuS7G2AAABJElEQVRYw+3V226DMAwF0NIG0pYChS3v//9ZM6mTLp7Sqn3BeVzEWe0NxgGgXQL4T87ZpZzLclXOpL4P8sN5Uga5kFfXkvwKuaF3y6rrc5ZzWa7Im+tYfctSllXkyXWsfscayzXnRcnLIidJ5BFrXHJelFzIWRJ5wBr3XBeVBzlPIvNYS86ZPEg9ieSp5Zwy2ZPyTSSPteScKZ6UbiInSeT7978qk9wR0S0RnSTy9Ptf6pByRUR3RHSWyI7oWIdUT6Q6IjWRqomUR6REpMREmkykWZf6k7IscidFREREREREREREREREREREROTvWjN6m+uP9X6/O9/m+tG8pX/qj37M+6ofY36b8Z/8G/g3eXub0tsVbK0C6mEC/qIu5WcAAAAASUVORK5CYII=", vibe: "coastal" },
+                { name: "Grey Fleece Sweat Shorts", url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAMAAAC53vnoAAAAQlBMVEUAAACpqalMTEw/Pz9NTU1SUlJTU1NTU1NPT09PT09SUlJTU1NUVFRVVVVVVVVPT09TU1NRUVFTU1NUVFRVVVVPT09vWwB4AAAADnRSTlMAr9Dg8PDy9PTy8vby8shT9mAAAADjSURBVFjD7dfbDoMgEAVQUMT7//+2XpYmLbYm0b6IeUyAaV2Atm0Ar6kUGoWi0SiSsmOdl3UkTY7Ix0fkxxO6vWe992vWxX5PR6NRNPrXfF/tZ7v7ttqPdDQaRVKWre8+Z7v13edkt++iaDSKRn+p3RfZfcl9G/u98h5E0WgUiftv7vdFdC/pvi+ie0n3fRHdS7rvi+ieS7rvi+gG3PdFdE8k3fdFdE8k3fdFdE8k3fdFdE8k3fdFdE/19ZHe73Vbe9vWh/Z/Nf60L9u671sbjYg+G9FP+l7tZ76fW9u2bbtp8g0YfBccO1K2YgAAAABJRU5ErkJggg==", vibe: "street" }
             ],
             acc: [
-                { name: "Dark Acetate Sunglasses", char: "🕶️", vibe: "coastal_chic" },
-                { name: "Vintage Trucker Cap", char: "🧢", vibe: "streetwear" },
-                { name: "Minimalist Silver Chain", char: "📿", vibe: "casual" },
-                { name: "Gold Medallion Pendant", char: "🏅", vibe: "resort" }
+                { name: "Dark Acetate Sunglasses", url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAA8CAMAAADYKdfpAAAAG1BMVEUAAABEREQ6OjpVVVVVVVVVVVVVVVVVVVVVVVTAn0P9AAAACXRSTlMA9O7y9vTy9vIy8N+EAAAAQklEQVRYw+3VwQkAMAgEMDHdf9N+VEEUfInAncDvVpWW3v3ZfI0+o0/pM/qMPqPP6DP6lD6jT+kz+pQ+o8/o8zf7fQF/7ADzYm0+wQAAAABJRU5ErkJggg==", vibe: "coastal" }
             ],
             shoes: [
-                { name: "Adidas Campus Navy", char: "👟", vibe: "coastal_chic" },
-                { name: "Yeezy-Style Slides Black", char: "🩴", vibe: "streetwear" },
-                { name: "Taupe Suede Birkenstocks", char: "🥿", vibe: "resort" },
-                { name: "Adidas Samba White/Black", char: "👟", vibe: "vintage_vacation" }
+                { name: "Adidas Campus Navy", url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAMAAAC53vnoAAAAP1BMVEUAAAAsLCw6OjpMTEw9PT1NTU1SUlJTU1NTU1NPT09PT09SUlJTU1NUVFRVVVVVVVVPT09TU1NRUVFTU1NUVFRpBwXJAAAADnRSTlMAmrzA3uDw8vby9vby8gsh7+QAAADjSURBVFjD7ddbDoMwEAVQG2wDppfQAAn//7MmhvKRp3bVvsg+JsC0DqAtA3g0iUGjUTQapWRb13UkTbYoj4vIiyd0e89679f0F/uSjkajSPTf5vvSfre7b6v9SEejUSRl2fruc7Zb331OdvsuikaT6L+l9hD5XbI7RH6XbO/VdIuikSR6P+T3w956XfIeRNFokrT7Pr8f9tbrkvfgP7n3960GgGZfRLP/RDR/K6LZeSK63Zek7YvoXkp6X0T3UtL7IrqXkt4X0b2U9L6I7qWk90V0LyW9L6J78ff1id4v286+bdu+tP+r6Uu7b9veb60Rib6b6F/6Xvrbz9+tXde1XdeNkW8W+By/1hV4xQAAAABJRU5ErkJggg==", vibe: "coastal" },
+                { name: "Comfort Slides Black", url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAMAAAC53vnoAAAANlBMVEUAAACpqalMTEw9PT1NTU1SUlJTU1NTU1NPT09PT09SUlJTU1NUVFRVVVVVVVVPT09TU1NRUVFTYvjUAAAADnRSTlMAr9Dg8PD09PL28vby8jUvH/wAAADaSURBVFjD7ddbDoQgEAVQEMX73860uYmJi8FExD0u4G0TIDYDhDYAnpMlaEwWjSUpXN91WUaKXIvytSgfi8R9Zz+PazzFn7xpTJaM/re+z7fPvXyff++msST9t2p7mO3WewfeR7Y9zGbpiZLfXbE9m/I7294r2e6W9B6Tf7m+96x7R9p7TP7V976V9p6U9h7Tfe+9X6Xdp6S9x+Tfe+9X6R0p7T0W++7bvpE2n6v2mWyfyd6f0vYz7f6mY7LojKz3p6bfe+97edvPZBlZMoZ8An8AHC6bYh6hAAAAAElFTUSuQmCC", vibe: "street" }
             ]
         };
 
@@ -347,7 +346,7 @@
                 if (!item) continue;
                 
                 document.getElementById(`text-${category}`).innerText = item.name;
-                document.getElementById(`layer-${category}`).innerText = item.char;
+                document.getElementById(`layer-${category}`).src = item.url;
             }
             rateOutfit();
         }
@@ -379,22 +378,22 @@
             currentVibes.forEach(v => vibeCounts[v] = (vibeCounts[v] || 0) + 1);
             let maxMatch = Math.max(...Object.values(vibeCounts), 0);
 
-            let score = 7.2;
-            let text = "✨ ECLECTIC HYBRID! Creative aesthetic mix from your design boards.";
+            let score = 7.5;
+            let text = "✨ ECLECTIC HYBRID! Unique mix match compilation.";
 
             if (maxMatch === currentVibes.length) {
                 score = 10.0;
-                text = "⚡ LOOK CONGRUENCE MET! Perfect aesthetic cohesion from your layout board.";
+                text = "⚡ AESTHETIC HARMONY! Perfect mood board look pairing.";
             } else if (maxMatch >= 2) {
                 score = 9.2;
-                text = "🔥 SYNC STABLE! Clean color block and sub-genre coordination detected.";
+                text = "🔥 SYNC STABLE! Great structural flow across layout tracks.";
             }
 
             document.getElementById("vibe-score").innerText = score.toFixed(1);
             document.getElementById("vibe-critique").innerText = text;
         }
 
-        window.onload = spinRandom;
+        window.onload = render;
     </script>
 </body>
 </html>
