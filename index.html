@@ -104,20 +104,19 @@
             box-shadow: 0 0 40px rgba(255, 0, 127, 0.4);
         }
 
-        .clothing-layer {
+        /* Displays styling elements nicely in center canvas layout */
+        .clothing-display {
             position: absolute;
+            font-size: 5.5rem;
             z-index: 2;
-            max-width: 45%;
-            max-height: 45%;
-            object-fit: contain;
             transition: all 0.2s ease-in-out;
-            filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.5));
+            user-select: none;
         }
 
-        #layer-acc    { z-index: 5; top: 12%; height: 18%; }
-        #layer-top    { z-index: 4; top: 28%; height: 28%; }
-        #layer-bottom { z-index: 3; top: 52%; height: 26%; }
-        #layer-shoes  { z-index: 2; bottom: 10%; height: 14%; }
+        #layer-acc    { z-index: 5; top: 15%; }
+        #layer-top    { z-index: 4; top: 32%; }
+        #layer-bottom { z-index: 3; top: 52%; }
+        #layer-shoes  { z-index: 2; bottom: 12%; }
 
         .right-panel {
             flex: 1.2;
@@ -251,10 +250,10 @@
         <div class="avatar-canvas">
             <div class="synth-sun"></div>
             
-            <img id="layer-acc" class="clothing-layer" src="" alt="Accessory">
-            <img id="layer-top" class="clothing-layer" src="" alt="Top">
-            <img id="layer-bottom" class="clothing-layer" src="" alt="Bottom">
-            <img id="layer-shoes" class="clothing-layer" src="" alt="Shoes">
+            <div id="layer-acc" class="clothing-display"></div>
+            <div id="layer-top" class="clothing-display"></div>
+            <div id="layer-bottom" class="clothing-display"></div>
+            <div id="layer-shoes" class="clothing-display"></div>
         </div>
 
         <div class="right-panel">
@@ -316,29 +315,29 @@
     </div>
 
     <script>
-        // High-quality, vector illustrations that are guaranteed to stay hosted permanently
+        // Uses native system symbols so that it works automatically everywhere without dependencies
         const assets = {
             top: [
-                { name: "Navy Halter Corset Top", url: "https://www.svgrepo.com/show/489953/tanktop.svg", vibe: "coastal_chic" },
-                { name: "Stüssy World Tour Tee", url: "https://www.svgrepo.com/show/503099/t-shirt.svg", vibe: "streetwear" },
-                { name: "Polo Knit Zip Hoodie", url: "https://www.svgrepo.com/show/475431/hoodie.svg", vibe: "casual" },
-                { name: "Striped Resort Shirt", url: "https://www.svgrepo.com/show/311394/shirt-hawaiian.svg", vibe: "resort" }
+                { name: "Navy Halter Corset Top", char: "🎽", vibe: "coastal_chic" },
+                { name: "Stüssy World Tour Tee", char: "👕", vibe: "streetwear" },
+                { name: "Polo Knit Zip Hoodie", char: "🧥", vibe: "casual" },
+                { name: "Striped Resort Shirt", char: "👔", vibe: "resort" }
             ],
             bottom: [
-                { name: "Light Wash Denim Skirt", url: "https://www.svgrepo.com/show/309951/skirt.svg", vibe: "coastal_chic" },
-                { name: "Grey Nike Sweat Shorts", url: "https://www.svgrepo.com/show/491953/shorts.svg", vibe: "streetwear" },
-                { name: "Light Wash Relaxed Jeans", url: "https://www.svgrepo.com/show/532321/jeans.svg", vibe: "casual" },
-                { name: "Navy Pleated Linen Pants", url: "https://www.svgrepo.com/show/422285/trousers-pants.svg", vibe: "resort" }
+                { name: "Light Wash Denim Skirt", char: "👗", vibe: "coastal_chic" },
+                { name: "Grey Nike Sweat Shorts", char: "🩳", vibe: "streetwear" },
+                { name: "Light Wash Relaxed Jeans", char: "👖", vibe: "casual" },
+                { name: "Navy Pleated Linen Pants", char: "👖", vibe: "resort" }
             ],
             acc: [
-                { name: "Dark Acetate Sunglasses", url: "https://www.svgrepo.com/show/532386/sunglasses.svg", vibe: "coastal_chic" },
-                { name: "Vintage Trucker Hat", url: "https://www.svgrepo.com/show/484837/cap.svg", vibe: "resort" },
-                { name: "Minimalist Silver Chain", url: "https://www.svgrepo.com/show/421453/necklace.svg", vibe: "casual" }
+                { name: "Dark Acetate Sunglasses", char: "🕶️", vibe: "coastal_chic" },
+                { name: "Vintage Trucker Hat", char: "🧢", vibe: "resort" },
+                { name: "Minimalist Silver Chain", char: "📿", vibe: "casual" }
             ],
             shoes: [
-                { name: "Adidas Campus Navy", url: "https://www.svgrepo.com/show/532381/sneaker.svg", vibe: "coastal_chic" },
-                { name: "Yeezy-Style Slides Black", url: "https://www.svgrepo.com/show/357904/sandals.svg", vibe: "streetwear" },
-                { name: "Taupe Suede Birkenstocks", url: "https://www.svgrepo.com/show/136154/sandals.svg", vibe: "resort" }
+                { name: "Adidas Campus Navy", char: "👟", vibe: "coastal_chic" },
+                { name: "Yeezy-Style Slides Black", char: "🩴", vibe: "streetwear" },
+                { name: "Taupe Suede Birkenstocks", char: "🥿", vibe: "resort" }
             ]
         };
 
@@ -350,8 +349,7 @@
                 if (!item) continue;
                 
                 document.getElementById(`text-${category}`).innerText = item.name;
-                const imgElement = document.getElementById(`layer-${category}`);
-                imgElement.src = item.url;
+                document.getElementById(`layer-${category}`).innerText = item.char;
             }
             rateOutfit();
         }
