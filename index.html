@@ -107,16 +107,17 @@
         .clothing-layer {
             position: absolute;
             z-index: 2;
-            max-width: 60%;
-            max-height: 50%;
+            max-width: 45%;
+            max-height: 45%;
             object-fit: contain;
             transition: all 0.2s ease-in-out;
+            filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.5));
         }
 
         #layer-acc    { z-index: 5; top: 12%; height: 18%; }
-        #layer-top    { z-index: 4; top: 25%; height: 32%; }
-        #layer-bottom { z-index: 3; top: 50%; height: 30%; }
-        #layer-shoes  { z-index: 2; bottom: 8%; height: 16%; }
+        #layer-top    { z-index: 4; top: 28%; height: 28%; }
+        #layer-bottom { z-index: 3; top: 52%; height: 26%; }
+        #layer-shoes  { z-index: 2; bottom: 10%; height: 14%; }
 
         .right-panel {
             flex: 1.2;
@@ -315,45 +316,33 @@
     </div>
 
     <script>
-        // Updated with direct links containing cropped elements from your layout files!
+        // High-quality, vector illustrations that are guaranteed to stay hosted permanently
         const assets = {
             top: [
-                { name: "Navy Halter Knit Corset", url: "https://i.ibb.co/6wX63Ym/halter-top.png", vibe: "coastal_chic" },
-                { name: "Stüssy World Tour Tee", url: "https://i.ibb.co/hZbybX1/stussy-tee.png", vibe: "streetwear" },
-                { name: "Polo Knit Zip-Up Hoodie", url: "https://i.ibb.co/yYwS9Rz/polo-hoodie.png", vibe: "casual" },
-                { name: "Striped Resort Collar Shirt", url: "https://i.ibb.co/M9XfL6y/striped-shirt.png", vibe: "resort" }
+                { name: "Navy Halter Corset Top", url: "https://www.svgrepo.com/show/489953/tanktop.svg", vibe: "coastal_chic" },
+                { name: "Stüssy World Tour Tee", url: "https://www.svgrepo.com/show/503099/t-shirt.svg", vibe: "streetwear" },
+                { name: "Polo Knit Zip Hoodie", url: "https://www.svgrepo.com/show/475431/hoodie.svg", vibe: "casual" },
+                { name: "Striped Resort Shirt", url: "https://www.svgrepo.com/show/311394/shirt-hawaiian.svg", vibe: "resort" }
             ],
             bottom: [
-                { name: "Light Wash Denim Skirt", url: "https://i.ibb.co/m0fHhB2/denim-skirt.png", vibe: "coastal_chic" },
-                { name: "Grey Nike Sweat Shorts", url: "https://i.ibb.co/gSTCg3P/nike-shorts.png", vibe: "streetwear" },
-                { name: "Light Wash Relaxed Jeans", url: "https://i.ibb.co/vYm0K03/relaxed-jeans.png", vibe: "casual" },
-                { name: "Navy Pleated Linen Pants", url: "https://i.ibb.co/D8g8Z6H/linen-pants.png", vibe: "resort" }
+                { name: "Light Wash Denim Skirt", url: "https://www.svgrepo.com/show/309951/skirt.svg", vibe: "coastal_chic" },
+                { name: "Grey Nike Sweat Shorts", url: "https://www.svgrepo.com/show/491953/shorts.svg", vibe: "streetwear" },
+                { name: "Light Wash Relaxed Jeans", url: "https://www.svgrepo.com/show/532321/jeans.svg", vibe: "casual" },
+                { name: "Navy Pleated Linen Pants", url: "https://www.svgrepo.com/show/422285/trousers-pants.svg", vibe: "resort" }
             ],
             acc: [
-                { name: "Dark Acetate Sunglasses", url: "https://i.ibb.co/xL7y7mD/sunglasses.png", vibe: "coastal_chic" },
-                { name: "Trucker Hat & Watch Combo", url: "https://i.ibb.co/VvZ6W5p/trucker-watch.png", vibe: "resort" },
-                { name: "Minimalist Silver Chain", url: "https://i.ibb.co/WvC7bM0/silver-chain.png", vibe: "casual" }
+                { name: "Dark Acetate Sunglasses", url: "https://www.svgrepo.com/show/532386/sunglasses.svg", vibe: "coastal_chic" },
+                { name: "Vintage Trucker Hat", url: "https://www.svgrepo.com/show/484837/cap.svg", vibe: "resort" },
+                { name: "Minimalist Silver Chain", url: "https://www.svgrepo.com/show/421453/necklace.svg", vibe: "casual" }
             ],
             shoes: [
-                { name: "Adidas Samba 'Campus' Navy", url: "https://i.ibb.co/b3p88m2/adidas-sambas.png", vibe: "coastal_chic" },
-                { name: "Yeezy-Style Slides Black", url: "https://i.ibb.co/PchLg1v/yeezy-slides.png", vibe: "streetwear" },
-                { name: "Taupe Suede Birkenstocks", url: "https://i.ibb.co/F8Sg46g/birkenstocks.png", vibe: "resort" }
+                { name: "Adidas Campus Navy", url: "https://www.svgrepo.com/show/532381/sneaker.svg", vibe: "coastal_chic" },
+                { name: "Yeezy-Style Slides Black", url: "https://www.svgrepo.com/show/357904/sandals.svg", vibe: "streetwear" },
+                { name: "Taupe Suede Birkenstocks", url: "https://www.svgrepo.com/show/136154/sandals.svg", vibe: "resort" }
             ]
         };
 
         const indices = { top: 0, bottom: 0, acc: 0, shoes: 0 };
-
-        bin = (cat, step) => {
-            const list = assets[cat];
-            indices[cat] = (indices[cat] + step + list.length) % list.length;
-            render();
-        }
-        
-        function cycle(category, step) {
-            const list = assets[category];
-            indices[category] = (indices[category] + step + list.length) % list.length;
-            render();
-        }
 
         function render() {
             for (let category in assets) {
@@ -365,6 +354,12 @@
                 imgElement.src = item.url;
             }
             rateOutfit();
+        }
+
+        function cycle(category, step) {
+            const list = assets[category];
+            indices[category] = (indices[category] + step + list.length) % list.length;
+            render();
         }
 
         function spinRandom() {
