@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>☀️ SUMMER STUDIO ☀️</title>
+    <title>☀️ SUMMER DRESS-UP STUDIO ☀️</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;800&family=Rajdhani:wght@600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@600;700&display=swap');
 
         * {
             box-sizing: border-box;
@@ -14,8 +14,9 @@
         }
 
         body {
-            font-family: 'Rajdhani', sans-serif;
-            background: linear-gradient(to bottom, #11052C 0%, #190033 50%, #4a0e4e 100%);
+            font-family: 'Quicksand', sans-serif;
+            /* Recreates the tropical synthwave beach sunset sky from your reference image */
+            background: linear-gradient(180deg, #3a478a 0%, #7d539b 35%, #ca5292 60%, #f37d7a 80%, #f7b070 100%);
             color: #fff;
             min-height: 100vh;
             display: flex;
@@ -23,318 +24,393 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
-            overflow: hidden;
+            overflow-x: hidden;
             position: relative;
         }
 
-        /* Recreates your exact neon perspective wireframe grid */
-        .grid-background {
+        /* Beautiful retro stylized sun and ocean horizon lines */
+        .scenery-background {
             position: absolute;
-            top: 0;
+            bottom: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                linear-gradient(rgba(148, 0, 211, 0.3) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(148, 0, 211, 0.3) 1px, transparent 1px);
-            background-size: 40px 40px;
+            background: 
+                radial-gradient(circle at 50% 65%, #fee685 0%, #f69469 15%, transparent 40%),
+                linear-gradient(to top, #ca587e 0%, #ca587e 12%, transparent 12%);
+            background-size: 100% 100%;
             z-index: 0;
-            transform: perspective(240px) rotateX(60deg);
-            transform-origin: top;
-            animation: gridMove 3s linear infinite;
-            opacity: 0.7;
+            opacity: 0.85;
         }
 
-        @keyframes gridMove {
-            0% { background-position: 0 0; }
-            100% { background-position: 0 40px; }
-        }
-
-        h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.6rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            color: #fff;
-            text-shadow: 0 0 10px #9400D3, 0 0 20px #ff007f;
-            margin-bottom: 25px;
-            z-index: 1;
-            text-align: center;
-        }
-
-        .studio-container {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            flex-direction: row;
-            gap: 40px;
-            background: rgba(12, 3, 33, 0.9);
-            border: 2px solid #ff007f;
-            box-shadow: 0 0 30px rgba(255, 0, 127, 0.4), inset 0 0 15px rgba(148, 0, 211, 0.3);
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 16px;
-            max-width: 950px;
+        .scenery-sea-lines {
+            position: absolute;
+            bottom: 0;
             width: 100%;
-        }
-
-        .avatar-canvas {
-            flex: 1;
-            background: rgba(5, 1, 15, 0.75);
-            border: 1px solid rgba(255, 0, 127, 0.3);
-            border-radius: 12px;
-            height: 480px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.9);
-            overflow: hidden;
-        }
-
-        .synth-sun {
-            position: absolute;
-            width: 260px;
-            height: 260px;
-            background: linear-gradient(to bottom, #ff007f, #ff8c00);
-            border-radius: 50%;
-            bottom: -20px;
+            height: 12%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.15) 2px, transparent 2px);
+            background-size: 100% 8px;
             z-index: 1;
-            opacity: 0.3;
-            box-shadow: 0 0 50px rgba(255, 0, 127, 0.5);
         }
 
-        /* Image layered alignment */
-        .clothing-layer {
+        /* Palm tree neon glow silhouettes on the left */
+        .palm-left {
             position: absolute;
+            left: 5%;
+            bottom: 12%;
+            font-size: 8rem;
+            opacity: 0.25;
+            z-index: 1;
+            text-shadow: 0 0 20px #00ffff, 0 0 40px #ff00ff;
+            user-select: none;
+        }
+
+        .main-layout {
+            position: relative;
             z-index: 2;
-            max-width: 70%;
-            max-height: 45%;
-            object-fit: contain;
-            transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.6));
-        }
-
-        #layer-acc    { z-index: 5; top: 10%; height: 18%; max-width: 45%; }
-        #layer-top    { z-index: 4; top: 24%; height: 32%; }
-        #layer-bottom { z-index: 3; top: 50%; height: 30%; }
-        #layer-shoes  { z-index: 2; bottom: 8%; height: 16%; }
-
-        .right-panel {
-            flex: 1.2;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            gap: 15px;
-        }
-
-        .wardrobe-controls {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .slot-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(148, 0, 211, 0.4);
-            border-radius: 10px;
-            padding: 14px 20px;
-            display: flex;
             align-items: center;
-            justify-content: space-between;
-        }
-
-        .slot-info { text-align: left; }
-
-        .slot-label {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            color: #00f0ff;
-            text-transform: uppercase;
-        }
-
-        .slot-selection-name {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        .arrow-btn {
-            background: transparent;
-            color: #ff007f;
-            border: 1px solid #ff007f;
-            font-size: 1rem;
-            width: 34px;
-            height: 34px;
-            border-radius: 6px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-        }
-
-        .arrow-btn:hover {
-            background: #ff007f;
-            color: #fff;
-            box-shadow: 0 0 12px #ff007f;
-        }
-
-        .arrow-group { display: flex; gap: 8px; }
-
-        .rating-box {
-            background: rgba(5, 1, 15, 0.8);
-            border: 1px dashed #00f0ff;
-            border-radius: 12px;
-            padding: 15px;
-            display: flex;
-            align-items: center;
+            max-width: 1050px;
+            width: 100%;
             gap: 20px;
         }
 
-        .rating-badge {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: #00f0ff;
-            text-shadow: 0 0 10px #00f0ff;
-            background: rgba(0, 240, 255, 0.1);
-            border: 1px solid #00f0ff;
-            padding: 10px 15px;
-            border-radius: 8px;
-            min-width: 90px;
+        /* Stylized wooden hanging sign matching the reference UI title card */
+        .wooden-signboard {
+            background: linear-gradient(135deg, #b07c56 0%, #8e5934 100%);
+            border: 5px solid #63391c;
+            border-radius: 12px;
+            padding: 15px 40px;
             text-align: center;
+            box-shadow: 0 10px 0 #42220d, 0 12px 20px rgba(0,0,0,0.4);
+            position: relative;
+            transform: rotate(-1deg);
+            margin-bottom: 10px;
         }
 
-        .critique-text {
-            text-align: left;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #dfbfff;
-            line-height: 1.3;
+        .wooden-signboard::before, .wooden-signboard::after {
+            content: '🔗';
+            position: absolute;
+            top: -22px;
+            font-size: 1.5rem;
         }
+        .wooden-signboard::before { left: 25px; }
+        .wooden-signboard::after { right: 25px; }
 
-        .random-trigger {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 800;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            background: linear-gradient(90deg, #ff007f, #9400D3);
+        .wooden-signboard h1 {
+            font-family: 'Fredoka One', cursive;
+            font-size: 2.3rem;
             color: #fff;
-            border: none;
-            padding: 16px;
-            border-radius: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 0px #cf6ba3, -2px -2px 0px #4ec7eb, 3px 5px 0px rgba(0,0,0,0.5);
+            line-height: 1.1;
+        }
+
+        .wooden-sub {
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: #ffeb3b;
+            text-transform: uppercase;
+            margin-top: 4px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+
+        .studio-container {
+            display: flex;
+            flex-direction: row;
+            gap: 30px;
+            width: 100%;
+            align-items: stretch;
+        }
+
+        /* Centralized dress-up backdrop matching the giant pink sunset circle framing */
+        .avatar-panel {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.15);
+            border: 3px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            height: 520px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sun-frame-backdrop {
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            background: linear-gradient(180deg, #ff2a85 0%, #ff7300 100%);
+            border-radius: 50%;
+            bottom: 40px;
+            z-index: 1;
+            box-shadow: 0 0 40px rgba(255, 42, 133, 0.6);
+        }
+
+        /* Clothes stacking coordinates matching your layout sketches */
+        .clothing-layer {
+            position: absolute;
+            z-index: 3;
+            max-width: 65%;
+            max-height: 50%;
+            object-fit: contain;
+            filter: drop-shadow(0 6px 10px rgba(0,0,0,0.4));
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.25);
+        }
+
+        #layer-acc    { z-index: 6; top: 18%; height: 12%; max-width: 40%; }
+        #layer-top    { z-index: 5; top: 28%; height: 28%; }
+        #layer-bottom { z-index: 4; top: 48%; height: 26%; }
+        #layer-shoes  { z-index: 3; bottom: 10%; height: 14%; }
+
+        /* Right panel with item categories inside frosted glass boxes */
+        .wardrobe-panel {
+            flex: 1.1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .category-card {
+            background: rgba(255, 255, 255, 0.12);
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            border-radius: 16px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .category-info {
+            text-align: left;
+        }
+
+        .category-tag {
+            font-family: 'Fredoka One', cursive;
+            font-size: 0.85rem;
+            color: #00ffff;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+        }
+
+        .item-display-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-top: 2px;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+        }
+
+        .navigation-arrows {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Bright pink glowing stylized round arrow selectors */
+        .nav-btn {
+            background: linear-gradient(135deg, #ff2a85 0%, #ff0055 100%);
+            color: #fff;
+            border: 2px solid #ffffff;
+            font-size: 1.1rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 0 20px rgba(148, 0, 211, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(255, 0, 85, 0.4), inset 0 2px 4px rgba(255,255,255,0.4);
             transition: all 0.2s ease;
         }
 
-        .random-trigger:hover {
-            box-shadow: 0 0 30px rgba(255, 0, 127, 0.7);
+        .nav-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px #ff0055;
+        }
+
+        .nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Bottom action section matching the reference dashboard */
+        .actions-row {
+            display: flex;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .vibe-meter {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid #00ffff;
+            border-radius: 16px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+        }
+
+        .vibe-score-badge {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.8rem;
+            color: #00f0ff;
+            text-shadow: 0 0 8px #00f0ff;
+            background: rgba(0, 240, 255, 0.15);
+            border: 1px solid #00f0ff;
+            padding: 6px 12px;
+            border-radius: 10px;
+        }
+
+        .vibe-text {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #e3f9ff;
+            text-align: left;
+        }
+
+        .random-fit-btn {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #00f0ff 0%, #00a8ff 100%);
+            color: #fff;
+            border: 3px solid #ffffff;
+            padding: 0 30px;
+            border-radius: 16px;
+            cursor: pointer;
+            box-shadow: 0 6px 15px rgba(0, 168, 255, 0.4);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .random-fit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px #00f0ff;
         }
 
         @media (max-width: 768px) {
             .studio-container { flex-direction: column; }
-            .avatar-canvas { height: 350px; }
+            .avatar-panel { height: 380px; }
+            .actions-row { flex-direction: column; }
         }
     </style>
 </head>
 <body>
 
-    <div class="grid-background"></div>
+    <div class="scenery-background"></div>
+    <div class="scenery-sea-lines"></div>
+    <div class="palm-left">🌴</div>
 
-    <h1>SUMMER STUDIO</h1>
-
-    <div class="studio-container">
+    <div class="main-layout">
         
-        <div class="avatar-canvas">
-            <div class="synth-sun"></div>
-            
-            <img id="layer-acc" class="clothing-layer" src="" alt="Accessory">
-            <img id="layer-top" class="clothing-layer" src="" alt="Top">
-            <img id="layer-bottom" class="clothing-layer" src="" alt="Bottom">
-            <img id="layer-shoes" class="clothing-layer" src="" alt="Shoes">
+        <div class="wooden-signboard">
+            <h1>Summer Dress-Up</h1>
+            <div class="wooden-sub">Vibe Mixer</div>
         </div>
 
-        <div class="right-panel">
-            <div class="wardrobe-controls">
+        <div class="studio-container">
+            
+            <div class="avatar-panel">
+                <div class="sun-frame-backdrop"></div>
                 
-                <div class="slot-card">
-                    <div class="slot-info">
-                        <div class="slot-label">01 // Torso Layer</div>
-                        <div id="text-top" class="slot-selection-name">...</div>
-                    </div>
-                    <div class="arrow-group">
-                        <button class="arrow-btn" onclick="cycle('top', -1)">◀</button>
-                        <button class="arrow-btn" onclick="cycle('top', 1)">▶</button>
-                    </div>
-                </div>
-
-                <div class="slot-card">
-                    <div class="slot-info">
-                        <div class="slot-label">02 // Lower Layer</div>
-                        <div id="text-bottom" class="slot-selection-name">...</div>
-                    </div>
-                    <div class="arrow-group">
-                        <button class="arrow-btn" onclick="cycle('bottom', -1)">◀</button>
-                        <button class="arrow-btn" onclick="cycle('bottom', 1)">▶</button>
-                    </div>
-                </div>
-
-                <div class="slot-card">
-                    <div class="slot-info">
-                        <div class="slot-label">03 // Head & Acc</div>
-                        <div id="text-acc" class="slot-selection-name">...</div>
-                    </div>
-                    <div class="arrow-group">
-                        <button class="arrow-btn" onclick="cycle('acc', -1)">◀</button>
-                        <button class="arrow-btn" onclick="cycle('acc', 1)">▶</button>
-                    </div>
-                </div>
-
-                <div class="slot-card">
-                    <div class="slot-info">
-                        <div class="slot-label">04 // Footwear</div>
-                        <div id="text-shoes" class="slot-selection-name">...</div>
-                    </div>
-                    <div class="arrow-group">
-                        <button class="arrow-btn" onclick="cycle('shoes', -1)">◀</button>
-                        <button class="arrow-btn" onclick="cycle('shoes', 1)">▶</button>
-                    </div>
-                </div>
+                <img id="layer-acc" class="clothing-layer" src="" alt="Accessory">
+                <img id="layer-top" class="clothing-layer" src="" alt="Top">
+                <img id="layer-bottom" class="clothing-layer" src="" alt="Bottom">
+                <img id="layer-shoes" class="clothing-layer" src="" alt="Shoes">
             </div>
 
-            <div class="rating-box">
-                <div id="vibe-score" class="rating-badge">0.0</div>
-                <div id="vibe-critique" class="critique-text">Evaluating combination...</div>
+            <div class="wardrobe-panel">
+                
+                <div class="category-card">
+                    <div class="category-info">
+                        <div class="category-tag">👚 Torso / Tops</div>
+                        <div id="text-top" class="item-display-name">...</div>
+                    </div>
+                    <div class="navigation-arrows">
+                        <button class="nav-btn" onclick="cycle('top', -1)">◀</button>
+                        <button class="nav-btn" onclick="cycle('top', 1)">▶</button>
+                    </div>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-info">
+                        <div class="category-tag">🩳 Lower / Bottoms</div>
+                        <div id="text-bottom" class="item-display-name">...</div>
+                    </div>
+                    <div class="navigation-arrows">
+                        <button class="nav-btn" onclick="cycle('bottom', -1)">◀</button>
+                        <button class="nav-btn" onclick="cycle('bottom', 1)">▶</button>
+                    </div>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-info">
+                        <div class="category-tag">🕶️ Accessories</div>
+                        <div id="text-acc" class="item-display-name">...</div>
+                    </div>
+                    <div class="navigation-arrows">
+                        <button class="nav-btn" onclick="cycle('acc', -1)">◀</button>
+                        <button class="nav-btn" onclick="cycle('acc', 1)">▶</button>
+                    </div>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-info">
+                        <div class="category-tag">👟 Footwear</div>
+                        <div id="text-shoes" class="item-display-name">...</div>
+                    </div>
+                    <div class="navigation-arrows">
+                        <button class="nav-btn" onclick="cycle('shoes', -1)">◀</button>
+                        <button class="nav-btn" onclick="cycle('shoes', 1)">▶</button>
+                    </div>
+                </div>
+
+                <div class="actions-row">
+                    <div class="vibe-meter">
+                        <div id="vibe-score" class="vibe-score-badge">0.0</div>
+                        <div id="vibe-critique" class="vibe-text">Evaluating combination...</div>
+                    </div>
+                    <button class="random-fit-btn" onclick="spinRandom()">Random Fit</button>
+                </div>
+
             </div>
 
-            <button class="random-trigger" onclick="spinRandom()">Randomize Fit</button>
         </div>
 
     </div>
 
     <script>
-        // Real transparent graphic assets converted directly to embedded code data
+        // High fidelity vector graphic curves representing your actual mood boards items natively
         const assets = {
             top: [
-                { name: "Navy Halter Corset Top", url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAMAAAC53vnoAAAAYFBMVEUAAAA6OjpMTEw9PT1NTU1SUlI7OztUVFRVVVVVVVVPT09TU1NRUVFTU1NUVFRVVVVPT09VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVTXGqmAAAAHXRSTlMAmizI0CDw7vDx7vD06vL08e709vT09vby8vTy8m9LpXoAAAEbSURBVFjD7dbXcoMwEAVQG2wDppfQAAn//7MmZpInY8vG7vS8eKy0u6NdBNo6gH+Mc9KkaZKWLpL6Pshv90kLpEVSv0jqV8gVfW6W63vWpEnTIvUtsZ46ZEnTIvUdsh4Z6zN78rRAnpDoA3t67D5pEckbEml6+mPPnlbI6xA9PbaftCokb0SkaZLWg9Y6Uu6I6In8RKRv0tKRvE6ip+30VREpGxFp6iI6iY7m6KRE6vKInkhfF6krInki0iMv0hWREpEmI02K6Imf3RSRvEg97Y6OiOSBiDR1pC7OayR7IiIiIiIiIiIiIiIiIiIi9UR/3m/pY6/F8/6fNn1pU0fSZyGv/f798pG/7/f/Vf8pXW9X6XoFmOAGIaswZ90AAAAASUVORK5CYII=", vibe: "coastal" },
-                { name: "Stüssy Logo Classic Tee", url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAMAAAC53vnoAAAAMFBMVEUAAAD///////////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABG6693AAAADnRSTlMA8vL09vL08vby9vby9sCAnCcAAADoSURBVFjD7dfbDoMgEAVQUMT7//+2XpYmLbYm0b7wPCbAtA6gLQM4m8Sg0SgajSIpM7Z5mUfSZIv8uEV+vCHfZfM76zNfUv+3o9EoGv3XfI/6PZ8XfUY/t6PRKJKyv4f0vV67+L2T/pJE/9vRaBSNfms6r7z6YkXfXREdfXFF6u6K6OiLK6LpXREdffFF6u6KaHpXREdfXJG6uyKa3hXR0RdXpG5ERERERERERERERERERERERERERERERET00Yidr+uK7667P9P40b790d5966MR2S99O/F730b9nrdtW7YfM6wXQ0wUvOQAAAAASUVORK5CYII=", vibe: "street" }
+                { name: "Navy Halter Corset Top", url: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M30,20 L70,20 L75,45 L65,85 L35,85 L25,45 Z' fill='%231d2440'/><path d='M30,20 Q50,45 70,20' fill='none' stroke='%23ff007f' stroke-width='2'/><path d='M35,20 L20,5 M65,20 L80,5' stroke='%231d2440' stroke-width='3'/></svg>", vibe: "coastal" },
+                { name: "Stüssy World Tour Tee", url: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M20,25 L80,25 L85,45 L70,45 L72,85 L28,85 L30,45 L15,45 Z' fill='%23f5f5f5'/><text x='50' y='55' font-family='sans-serif' font-weight='900' font-size='10' fill='%23111' text-anchor='middle'>STÜSSY</text></svg>", vibe: "street" },
+                { name: "Striped Resort Shirt", url: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M20,25 L80,25 L85,50 L70,50 L70,90 L30,90 L30,50 L15,50 Z' fill='%23eaf2f8'/><path d='M38,25 L38,90 M46,25 L46,90 M54,25 L54,90 M62,25 L62,90' stroke='%232874a6' stroke-width='3'/><path d='M50,25 L35,40 M50,25 L65,40' fill='none' stroke='%23eaf2f8' stroke-width='4'/></svg>", vibe: "vintage" }
             ],
             bottom: [
-                { name: "Light Wash Denim Skirt", url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAMAAAC53vnoAAAAWlBMVEUAAADQ0ND///87Ozs/Pz9PT09TU1NTU1NTU1NOTk5PT09PT09SUlJTU1NUVFRVVVVVVVVVVVVPT09TU1NRUVFTU1NUVFRVVVVPT09VVVVVVVVVVVVVVVVVVVVw71o8AAAAH3RSTlMAwMDe4PDw7/D06vP08vTu8vTy9vT09vTy8vT08vJuS7G2AAABJElEQVRYw+3V226DMAwF0NIG0pYChS3v//9ZM6mTLp7Sqn3BeVzEWe0NxgGgXQL4T87ZpZzLclXOpL4P8sN5Uga5kFfXkvwKuaF3y6rrc5ZzWa7Im+tYfctSllXkyXWsfscayzXnRcnLIidJ5BFrXHJelFzIWRJ5wBr3XBeVBzlPIvNYS86ZPEg9ieSp5Zwy2ZPyTSSPteScKZ6UbiInSeT7978qk9wR0S0RnSTy9Ptf6pByRUR3RHSWyI7oWIdUT6Q6IjWRqomUR6REpMREmkykWZf6k7IscidFREREREREREREREREREREROTvWjN6m+uP9X6/O9/m+tG8pX/qj37M+6ofY36b8Z/8G/g3eXub0tsVbK0C6mEC/qIu5WcAAAAASUVORK5CYII=", vibe: "coastal" },
-                { name: "Grey Fleece Sweat Shorts", url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAMAAAC53vnoAAAAQlBMVEUAAACpqalMTEw/Pz9NTU1SUlJTU1NTU1NPT09PT09SUlJTU1NUVFRVVVVVVVVPT09TU1NRUVFTU1NUVFRVVVVPT09vWwB4AAAADnRSTlMAr9Dg8PDy9PTy8vby8shT9mAAAADjSURBVFjD7dfbDoMgEAVQUMT7//+2XpYmLbYm0b6IeUyAaV2Atm0Ar6kUGoWi0SiSsmOdl3UkTY7Ix0fkxxO6vWe992vWxX5PR6NRNPrXfF/tZ7v7ttqPdDQaRVKWre8+Z7v13edkt++iaDSKRn+p3RfZfcl9G/u98h5E0WgUiftv7vdFdC/pvi+ie0n3fRHdS7rvi+ieS7rvi+gG3PdFdE8k3fdFdE8k3fdFdE8k3fdFdE8k3fdFdE/19ZHe73Vbe9vWh/Z/Nf60L9u671sbjYg+G9FP+l7tZ76fW9u2bbtp8g0YfBccO1K2YgAAAABJRU5ErkJggg==", vibe: "street" }
+                { name: "Light Wash Denim Skirt", url: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M28,15 L72,15 L80,75 L20,75 Z' fill='%237fb3d5'/><path d='M28,28 L72,28' stroke='%23f7dc6f' stroke-width='1.5' stroke-dasharray='3,2'/><path d='M50,15 L50,32' stroke='%23f7dc6f' stroke-width='1.5'/></svg>", vibe: "coastal" },
+                { name: "Grey Nike Sweat Shorts", url: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M25,15 L75,15 L80,65 L52,68 L50,30 L48,68 L20,65 Z' fill='%23bdc3c7'/><circle cx='32' cy='40' r='3' fill='%23fff'/></svg>", vibe: "street" },
+                { name: "Navy Pleated Linen Pants", url: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M28,15 L72,15 L76,85 L52,85 L50,35 L48,85 L24,85 Z' fill='%231f2a44'/><path d='M38,20 L38,80 M62,20 L62,80' stroke='%2317202a' stroke-width='1'/></svg>", vibe: "vintage" }
             ],
             acc: [
-                { name: "Dark Acetate Sunglasses", url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAA8CAMAAADYKdfpAAAAG1BMVEUAAABEREQ6OjpVVVVVVVVVVVVVVVVVVVVVVVTAn0P9AAAACXRSTlMA9O7y9vTy9vIy8N+EAAAAQklEQVRYw+3VwQkAMAgEMDHdf9N+VEEUfInAncDvVpWW3v3ZfI0+o0/pM/qMPqPP6DP6lD6jT+kz+pQ+o8/o8zf7fQF/7ADzYm0+wQAAAABJRU5ErkJggg==", vibe: "coastal" }
+                { name: "Dark Acetate Sunglasses", url: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50'><path d='M15,15 L85,15 L82,35 Q70,42 60,35 L55,25 L45,25 L40,35 Q30,42 18,35 Z' fill='%23111111'/><path d='M22,20 L35,20 L32,30 Q25,32 22,25 Z' fill='%23555' opacity='0.6'/><path d='M68,20 L81,20 L78,30 Q71,32 68,25 Z' fill='%23555' opacity='0.6'/></svg>", vibe: "coastal" },
+                { name: "Vintage Trucker Cap", url: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 60'><path d='M20,40 C20,10 80,10 80,40 Z' fill='%232471a3'/><path d='M50,40 Q85,40 95,50 L45,52 Z' fill='%23d5f5e3'/></svg>", vibe: "street" }
             ],
             shoes: [
-                { name: "Adidas Campus Navy", url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAMAAAC53vnoAAAAP1BMVEUAAAAsLCw6OjpMTEw9PT1NTU1SUlJTU1NTU1NPT09PT09SUlJTU1NUVFRVVVVVVVVPT09TU1NRUVFTU1NUVFRpBwXJAAAADnRSTlMAmrzA3uDw8vby9vby8gsh7+QAAADjSURBVFjD7ddbDoMwEAVQG2wDppfQAAn//7MmhvKRp3bVvsg+JsC0DqAtA3g0iUGjUTQapWRb13UkTbYoj4vIiyd0e89679f0F/uSjkajSPTf5vvSfre7b6v9SEejUSRl2fruc7Zb331OdvsuikaT6L+l9hD5XbI7RH6XbO/VdIuikSR6P+T3w956XfIeRNFokrT7Pr8f9tbrkvfgP7n3960GgGZfRLP/RDR/K6LZeSK63Zek7YvoXkp6X0T3UtL7IrqXkt4X0b2U9L6I7qWk90V0LyW9L6J78ff1id4v286+bdu+tP+r6Uu7b9veb60Rib6b6F/6Xvrbz9+tXde1XdeNkW8W+By/1hV4xQAAAABJRU5ErkJggg==", vibe: "coastal" },
-                { name: "Comfort Slides Black", url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAMAAAC53vnoAAAANlBMVEUAAACpqalMTEw9PT1NTU1SUlJTU1NTU1NPT09PT09SUlJTU1NUVFRVVVVVVVVPT09TU1NRUVFTYvjUAAAADnRSTlMAr9Dg8PD09PL28vby8jUvH/wAAADaSURBVFjD7ddbDoQgEAVQEMX73860uYmJi8FExD0u4G0TIDYDhDYAnpMlaEwWjSUpXN91WUaKXIvytSgfi8R9Zz+PazzFn7xpTJaM/re+z7fPvXyff++msST9t2p7mO3WewfeR7Y9zGbpiZLfXbE9m/I7294r2e6W9B6Tf7m+96x7R9p7TP7V976V9p6U9h7Tfe+9X6Xdp6S9x+Tfe+9X6R0p7T0W++7bvpE2n6v2mWyfyd6f0vYz7f6mY7LojKz3p6bfe+97edvPZBlZMoZ8An8AHC6bYh6hAAAAAElFTUSuQmCC", vibe: "street" }
+                { name: "Adidas Campus Navy", url: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50'><path d='M15,35 Q30,10 85,25 L85,42 L15,42 Z' fill='%231a2536'/><path d='M15,42 L85,42 L85,47 L15,47 Z' fill='%23eaecee'/><path d='M45,22 L52,35 M52,20 L59,33 M59,18 L66,31' stroke='%23fff' stroke-width='3'/></svg>", vibe: "coastal" },
+                { name: "Comfort Slides Black", url: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50'><path d='M10,40 Q50,25 90,40 L85,46 L15,46 Z' fill='%231c2833'/><path d='M25,40 Q45,15 70,35' fill='none' stroke='%23111' stroke-width='8'/></svg>", vibe: "street" }
             ]
         };
 
@@ -378,15 +454,15 @@
             currentVibes.forEach(v => vibeCounts[v] = (vibeCounts[v] || 0) + 1);
             let maxMatch = Math.max(...Object.values(vibeCounts), 0);
 
-            let score = 7.5;
-            let text = "✨ ECLECTIC HYBRID! Unique mix match compilation.";
+            let score = 6.8;
+            let text = "✨ MIX MIX! A creative hybrid blend across genres.";
 
             if (maxMatch === currentVibes.length) {
                 score = 10.0;
-                text = "⚡ AESTHETIC HARMONY! Perfect mood board look pairing.";
+                text = "⚡ CONGRUENCE MET! Flawless coordination sequence.";
             } else if (maxMatch >= 2) {
-                score = 9.2;
-                text = "🔥 SYNC STABLE! Great structural flow across layout tracks.";
+                score = 9.0;
+                text = "🔥 SYNC STABLE! Solid stylistic alignment matches.";
             }
 
             document.getElementById("vibe-score").innerText = score.toFixed(1);
